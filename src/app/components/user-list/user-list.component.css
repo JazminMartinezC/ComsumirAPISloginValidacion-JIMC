@@ -1,0 +1,73 @@
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 10%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+  
+  /* Estilos para centrar el contenedor y darle fondo verde */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; /* Fondo verde */
+    min-height: 40%;
+  }
+  
+  /* Estilos para la caja de filtro */
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 90%;
+    margin-bottom: 16px;
+    border-top-left-radius: 8%;
+    text-align: center;  }
+  
+  .mat-form-field-label {
+    color: #000000; 
+    /* Etiqueta de filtro en blanco */
+    font-size: 24px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+  
+  input.mat-input-element {
+    background-color: rgb(255, 107, 107); /* Fondo blanco */
+    border: 1px solid rgb(255, 0, 0); /* Borde negro */
+  }
+  
+  /* Estilos para la tabla */
+  .mat-elevation-z8 {
+    width: 90%;
+    margin: 10 auto;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  /* Asegurar que las columnas tengan un ancho equilibrado */
+  th, td {
+    width: 25%; /* Distribuir columnas uniformemente */
+    text-align: left;
+  }
+  
+  /* Estilo para la fila de encabezado */
+  th.mat-header-cell {
+    background-color: #ff5c5c;
+    color: #333;
+    color: #ff5c5c;
+  }
+  
+  /* Estilo de fila de la tabla */
+  td.mat-cell {
+    padding: 8px 16px;
+    color: #ff5c5c;
+    text-align: center;
+  }
+  
+  /* Estilo para el paginador */
+  .mat-paginator {
+    margin-top: 16px;
+  }
+  
