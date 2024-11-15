@@ -175,3 +175,4 @@ Es importante por que uno se maneja diferente a otro ya que en este caso en la l
 En este caso se pueden implementar diversos proyectos los cuales pueden ser APIS de un área empresarial, un espacio escolar los cuales también toman otros casos de APIS las cuales complementan el contenido del proyecto en el caso de un espacio escolar se pueden determinar la información de los estudiantes, los profesores, materias, horarios, pagos, evaluaciones, asistencias, etc. Las cuales impulsan a un proyecto mas elaborado.
 
 # Para la validación de usuarios en el login en base a lo que existe en la API.
+
