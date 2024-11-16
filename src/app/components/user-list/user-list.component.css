@@ -1,73 +1,66 @@
   
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 10%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
-  
-  /* Estilos para centrar el contenedor y darle fondo verde */
-.container {
+  .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: #ffffff; /* Fondo verde */
-    min-height: 40%;
+    justify-content: center;
+  
+    padding: 20px;
   }
   
-  /* Estilos para la caja de filtro */
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 90%;
-    margin-bottom: 16px;
-    border-top-left-radius: 8%;
-    text-align: center;  }
-  
-  .mat-form-field-label {
-    color: #000000; 
-    /* Etiqueta de filtro en blanco */
-    font-size: 24px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-  
-  input.mat-input-element {
-    background-color: rgb(255, 107, 107); /* Fondo blanco */
-    border: 1px solid rgb(255, 0, 0); /* Borde negro */
+  /* Título de la página */
+  .title {
+    text-align: center;
+    color: #ffffff;  /* Azul */
+    margin-bottom: 20px;
   }
   
-  /* Estilos para la tabla */
-  .mat-elevation-z8 {
-    width: 90%;
-    margin: 10 auto;
-    background-color: #ffffff; /* Fondo blanco */
+  /* Estilo de la tabla */
+  .table-container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #ffffff;  /* Azul claro */
     border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    overflow: hidden;
   }
   
-  /* Asegurar que las columnas tengan un ancho equilibrado */
-  th, td {
-    width: 25%; /* Distribuir columnas uniformemente */
-    text-align: left;
+  mat-table {
+    width: 100%;
+    background-color: #fa0000;
   }
   
-  /* Estilo para la fila de encabezado */
-  th.mat-header-cell {
-    background-color: #ff5c5c;
-    color: #333;
-    color: #ff5c5c;
+  /* Paginador al final */
+  mat-paginator {
+    margin-top: 20px;
+    background-color: #f8f8f8;
+    color: #000000;
+    
   }
   
-  /* Estilo de fila de la tabla */
-  td.mat-cell {
-    padding: 8px 16px;
-    color: #ff5c5c;
+  /* Estilo para las celdas de la tabla */
+  .mat-header-cell, .mat-cell {
     text-align: center;
   }
   
-  /* Estilo para el paginador */
-  .mat-paginator {
-    margin-top: 16px;
+  .mat-header-cell {
+    background-color: #ff0000;  /* Azul */
+    color: white;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium';
+  }
+  
+  .mat-row {
+    background-color: #ffffff;
+  }
+  
+  .mat-row:hover {
+    background-color: #ffffff;
+  }
+  
+  /* Estilo para el filtro */
+  .mat-form-field {
+    margin-bottom: 20px;
+    width: 300px;
+    border-radius: 90px;
   }
   
