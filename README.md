@@ -332,4 +332,10 @@ export const routes: Routes = [
 
 ```
 
+### Resultado de la ejecución 
+#### Login
+![image](https://github.com/user-attachments/assets/74b65dd3-f439-492d-a15b-33af9ff82f26)
 
+
+### muestra el siguiente componente 
+![image](https://github.com/user-attachments/assets/1e0ab87c-b59b-45c7-bb93-a41202875cb4)
