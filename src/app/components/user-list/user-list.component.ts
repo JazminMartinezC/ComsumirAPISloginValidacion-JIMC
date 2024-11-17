@@ -5,14 +5,15 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'app-user-list',
   standalone: true,
   imports: [
     MatPaginator,MatSort,
     MatTableModule,MatFormFieldModule,
-    MatInputModule
+    MatInputModule,MatMenuModule
   ],
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
