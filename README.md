@@ -147,32 +147,195 @@ Este código HTML muestra una tabla interactiva de usuarios con funcionalidades 
 #### ° Paginación de la tabla.
 #### ° Filtrado de un dato de la tabla.
 
-
-## Preguntas en base al trabajo
-
-##### ¿Qué hace el método getUsers en este servicio?
-
-Funciona como el método que permitirá ver el flujo de los datos que están almacenados en el arreglo de any el cual tiene los datos que están en el API que se señaló.
-##### ¿Por qué es necesario importar HttpClientModule?
-
-Actualmente HttpClientModule no funciona por lo tanto se hace uso de HttpClient, este es importante importarlo para poder facilitar la comunicación entre la aplicación de Angular y el servidor las cuales dan resultados a las solicitudes de una API.
-##### ¿Qué función cumple el método ngOnInit en el componente UserListComponent?
-
-Llama al servicio para obtener los usuarios que están el arreglo el cual lo que hace es asignarlos a una variable para obtenerlos, una vez obtenida se reasigna y con este se puede trabajar.
-
-##### ¿Para qué sirve el bucle *ngFor en Angular?
-
-Sirve para generar el listado del contenido que tiene el arreglo que se pide en el servicio, actualmente se usa el @for el cual tiene la misma función
-#### Preguntas para reflexionar
-
-##### 1. ¿Qué ventajas tiene el uso de servicios en Angular para el consumo de APIs?
-El uso de servicios facilita el uso de la llamadas y almacenamiento de los datos puesto que en este esta la información que puede ser utilizada en cualquier otro componente que se requiera llamar ya que también uso del componente de Injectable y este permite a relacionarse entre otros componentes.
-##### 2. ¿Por qué es importante separar la lógica de negocio de la lógica de presentación?
-Es importante por que uno se maneja diferente a otro ya que en este caso en la lógica de negocio se plantea el uso de las bases de datos y como este funge para cada uno de los componente o vista de usuario el cual es la lógica de presentación, en este caso el lado de la lógica de negocios se tiene que tener en cuenta factores como la seguridad de los datos, consistencia, integridad de los mismo puesto que en base a ellos un usuario final que hace uso de la interfaz de usuario tiene que tomar ciertas decisiones en base a lo que se muestra. integridad 
-
-
-##### 3. ¿Qué otros tipos de datos o APIs podrías integrar en un proyecto como este? 
-En este caso se pueden implementar diversos proyectos los cuales pueden ser APIS de un área empresarial, un espacio escolar los cuales también toman otros casos de APIS las cuales complementan el contenido del proyecto en el caso de un espacio escolar se pueden determinar la información de los estudiantes, los profesores, materias, horarios, pagos, evaluaciones, asistencias, etc. Las cuales impulsan a un proyecto mas elaborado.
-
 # Para la validación de usuarios en el login en base a lo que existe en la API.
 
+#### se crea un nuevo componente el cual tiene el nombre de login
+Run `ng generate component login`
+
+#### Una vez creado lo que se hace es que en el archivo de login.component. ts se le agrega el codigo para poder validar los datos que se piden en los fild de correo y contraseña  para acceder al siguiente componente 
+``` typescript
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common'; 
+import { UserService } from '../services/user.service';          // Importar el servicio
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatStepperModule} from '@angular/material/stepper';
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,      
+    MatCardModule,
+    MatTabsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    FormsModule,
+    MatSnackBarModule, MatStepperModule
+  ],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
+  remail: string = '';
+  rpassword: string = '';
+  rconfirmPassword: string = '';
+
+  constructor(private router: Router, private userService: UserService, private snackBar: MatSnackBar) {}
+
+  iniciarPagina() {
+    // Validación de los campos de correo y contraseña
+    if (this.email && this.password) {
+      // Llamada al servicio para obtener los usuarios
+      this.userService.getUsers().subscribe(
+        (users) => {
+          // Buscar el usuario que coincida con el correo y la contraseña
+          const user = users.find(u => u.email === this.email && u.password === this.password);
+          
+          if (user) {
+            // Si el usuario es válido, navegar al dashboard
+            this.router.navigate(['/user-list']);
+          } else {
+            // Si no se encuentra un usuario que coincida, mostrar mensaje de error
+            this.snackBar.open('Credenciales incorrectas', 'Cerrar', { duration: 3000 });
+          }
+        },
+        (error) => {
+          // Manejo de error en caso de que falle la llamada a la API
+          console.error('Error al obtener los usuarios', error);
+          this.snackBar.open('Error al obtener los usuarios', 'Cerrar', { duration: 3000 });
+        }
+      );
+    } else {
+      // Si no se completan los campos
+      this.snackBar.open('Por favor complete los campos', 'Cerrar', { duration: 3000 });
+    }
+  }
+}
+```
+ #### En el componente de login.component.html se realizo todo la estructura para poder ingresar los datos necesarios para validar los cuales son correo y contraseña.
+ ```html
+<style>
+    div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-size: cover;
+            background-color: rgb(255, 222, 112);
+            background-image: url("fondo.jpg");
+            background-position: center;
+            padding: 20px;
+            box-sizing: border-box;
+          }
+          .btn {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-items: center;
+          }
+
+          mat-card-title
+          {
+            align-items: center;
+            align-content: center;
+          }
+
+          mat-form-field
+          {
+            color: black;
+            background-color: rgb(255, 255, 255);
+        }
+          </style>
+<div >
+    
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Iniciar sesion - Registro </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-tab-group dynamicHeight>
+            
+            <mat-tab label="Iniciar Sesión">
+              <mat-form-field class="example-full-width">
+                <mat-label>Correo</mat-label>
+                <input type="email" matInput placeholder="Email" [(ngModel)]="email" required>
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput placeholder="Password" [(ngModel)]="password" required>
+                <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+              <br>
+              <button class="btn" (click)="iniciarPagina()">Login</button>
+            </mat-tab>
+
+            <mat-tab label="Register">
+              <mat-form-field class="example-full-width">
+                <mat-label>Correo</mat-label>
+                <input type="email" matInput placeholder="Email" [(ngModel)]="remail" required>
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <br>
+              <mat-form-field class="example-full-width">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput placeholder="Password" [(ngModel)]="rpassword" required>
+                <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+              <br>
+              <mat-form-field class="example-full-width">
+                <mat-label>Confirmar contraseña</mat-label>
+                <input type="password" matInput placeholder="Confirm Password" [(ngModel)]="rconfirmPassword" required>
+                <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+              <br>
+              <button class="btn" (click)="iniciarPagina()">Register</button>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+```
+#### En el el archivo de app.routes.ts se realiza la codificación para poder navegar entre los componentes. Por tanto se crean las rutas que se mostraran durante el uso.
+```typescript
+import { Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+export const routes: Routes = [
+    {
+        path: '', redirectTo: '/login',pathMatch:'full'
+    },
+    {
+        path: 'login', component:LoginComponent
+    },
+    {
+        path: 'user-list', component:UserListComponent
+    },
+];
+
+```
+
+### Resultado de la ejecución 
+#### Login
+![image](https://github.com/user-attachments/assets/74b65dd3-f439-492d-a15b-33af9ff82f26)
+
+
+### muestra el siguiente componente 
+![image](https://github.com/user-attachments/assets/1e0ab87c-b59b-45c7-bb93-a41202875cb4)
