@@ -77,63 +77,226 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
 # Tabla de Usuarios
 
-Este código HTML muestra una tabla interactiva de usuarios con funcionalidades como filtrado, ordenamiento y paginación, utilizando Angular Material.
+Este código HTML muestra una tabla interactiva de usuarios con funcionalidades como filtrado, ordenamiento y paginación, utilizando Angular Material.ademas de tener en la parte superior un menu de opciones.
+el cual tiene un desplegable de opciones,
 
 ## Código del Componente HTML y CSS
 
 ### HTML
 
 ```html
-<div class="container">
-  <!-- Título de la página -->
-  <h1 class="title">Tabla de Usuarios</h1>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Mi Sitio Angular</title>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/@angular/material@15.0.0/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+      <style>
+        /* Configuración de imagen de fondo */
+        body, html {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          font-family: Arial, sans-serif;
+          background-image: url('fondo.jpg');
+          background-size: cover;
+          background-position: center;
+          color: white;
+        }
+    
+        /* Estilo de la barra de navegación */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 20px;
+          background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+        }
+    
+        .navbar .logo {
+          font-size: 24px;
+          font-weight: bold;
+          color: #ffffff;
+          text-decoration: none;
+        }
+    
+        .navbar .menu {
+          list-style: none;
+          display: flex;
+          gap: 20px;
+        }
+    
+        .navbar .menu li {
+          display: inline;
+        }
+    
+        .navbar .menu li a {
+          color: #ffffff;
+          text-decoration: none;
+          font-size: 18px;
+          transition: color 0.3s;
+        }
+    
+        .navbar .menu li a:hover {
+          color: #ffecb7; /* Cambia el color al pasar el cursor */
+        }
+    
+        /* Contenedor principal */
+        .main-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
+    
+        .welcome-container {
+          text-align: center;
+          background-color: rgba(0, 0, 0, 0.6);
+          padding: 20px;
+          border-radius: 10px;
+          margin-bottom: 30px;
+        }
+    
+        .welcome-container h1 {
+          font-size: 48px;
+          color: #ffffff;
+          margin: 0;
+        }
+    
+        .welcome-container p {
+          font-size: 24px;
+          color: #ffffff;
+          margin: 10px 0 20px;
+        }
+    
+        .welcome-button {
+          display: inline-block;
+          padding: 10px 20px;
+          font-size: 18px;
+          color: #ffffff;
+          background-color: #007bff;
+          border: none;
+          border-radius: 5px;
+          text-decoration: none;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+    
+        .welcome-button:hover {
+          background-color: #0056b3;
+        }
+    
+        /* Estilo para la tabla */
+        .menu-bar {
+          display: flex;
+          gap: 15px;
+          margin-bottom: 20px;
+        }
+    
+        .table-container {
+          width: 100%;
+        }
+    
 
-  <!-- Filtro -->
-  <mat-form-field class="mat-form-field">
-    <mat-label>Filtrar</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="juan" #input />
-  </mat-form-field>
+    
+        .mat-form-field {
+          width: 100%;
+          max-width: 500px;
+          margin-bottom: 20px;
+        }
+      </style>
+    </head>
+    <body>
+    
+      <!-- Barra de menú principal -->
+      <nav class="navbar">
+        <a href="#" class="logo">Mi Sitio</a>
 
-  <!-- Tabla de usuarios -->
-  <div class="mat-elevation-z8 table-container">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <!-- ID Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-      </ng-container>
+                 <!-- Barra de menú interactiva -->
+        <div class="menu-bar">
+          <button mat-button [matMenuTriggerFor]="menu1" class="color">Menú 1</button>
+          <mat-menu #menu1="matMenu" yPosition="above">
+            <button mat-menu-item>Mi información</button>
+            <button mat-menu-item>Escuela</button>
+          </mat-menu>
+    
+          <button mat-button [matMenuTriggerFor]="menu2" class="color">Menú 2</button>
+          <mat-menu #menu2="matMenu" yPosition="above">
+            <button mat-menu-item>Mi información</button>
+            <button mat-menu-item>Escuela</button>
+          </mat-menu>
+    
+          <button mat-button [matMenuTriggerFor]="menu3" class="color">Menú 3</button>
+          <mat-menu #menu3="matMenu" yPosition="above">
+            <button mat-menu-item>Mi información</button>
+            <button mat-menu-item>Escuela</button>
+          </mat-menu>
+    
+          <button mat-button [matMenuTriggerFor]="menu4" class="color">Menú 4</button>
+          <mat-menu #menu4="matMenu" yPosition="above">
+            <button mat-menu-item>Mi información</button>
+            <button mat-menu-item>Escuela</button>
+          </mat-menu>
+        </div>     
+      </nav>
+    
+      <!-- Contenido principal -->
+      <div class="main-container">
+    
+        <!-- Pantalla de bienvenida -->
+        <div class="welcome-container">
+          <h1>Bienvenido a mi página en Angular</h1>
+                </div>    
+        <!-- Tabla de usuarios -->
+        <h1 class="title">Tabla de Usuarios</h1>
+        <mat-form-field class="mat-form-field">
+          <mat-label>Filtrar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="juan" #input />
+        </mat-form-field>
+    
+        <div class="mat-elevation-z8 table-container">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+              <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+              <td mat-cell *matCellDef="let row">{{ row.role }}</td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No se encuentra en los "{{ input.value }}"</td>
+            </tr>
+          </table>
+        </div>
+    
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="componente"></mat-paginator>
+        <br>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
-      </ng-container>
+        <a href="#" class="welcome-button">Regresar a Login</a>
 
-      <!-- Email Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let row">{{ row.email }}</td>
-      </ng-container>
+      </div>
+      
+    </body>
+    </html>
 
-      <!-- Role Column -->
-      <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
-        <td mat-cell *matCellDef="let row">{{ row.role }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      <!-- Row shown when there is no matching data -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No se encuentra en los "{{ input.value }}"</td>
-      </tr>
-    </table>
-  </div>
-
-  <!-- Paginador -->
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="componente"></mat-paginator>
-</div>
 ```
 
 #### En el componente de app.component.ts se coloca el codigo de 
@@ -142,7 +305,8 @@ Este código HTML muestra una tabla interactiva de usuarios con funcionalidades 
 
 
 ## Pantalla final 
-![image](https://github.com/user-attachments/assets/877c7a5e-23c7-4f21-b707-abe1a97c2999)
+![image](https://github.com/user-attachments/assets/76f50572-7514-4479-8443-5e0d4e9283b1)
+
 #### ° Se puede determinar la cantidad de usuarios que se mostraran en la tabla.
 #### ° Paginación de la tabla.
 #### ° Filtrado de un dato de la tabla.
@@ -338,4 +502,5 @@ export const routes: Routes = [
 
 
 ### muestra el siguiente componente 
-![image](https://github.com/user-attachments/assets/1e0ab87c-b59b-45c7-bb93-a41202875cb4)
+![image](https://github.com/user-attachments/assets/4c57ecc8-dbdf-4b76-8d79-f72fdc6c0da5)
+
